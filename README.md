@@ -7,6 +7,7 @@ py파일 실행전 터미널에서 아래 명령어로 라이브러리 설치
    
 pip install flask flask_cors pandas numpy scikit-learn matplotlib
 
+
 그래도 실행이 되지 않는다면
  
 pip install --force-reinstall PySide2
