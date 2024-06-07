@@ -8,90 +8,16 @@
 <body>
     <h1>Voice Phishing Detection</h1>
     <input type="file" id="fileInput" accept=".txt">
-    <button onclick="uploadFile()">Upload and Classify</button>
+    <button onclick="uploadFile()">업로드</button>
     <div id="conversation" style="display: none;">
         <h2>Conversation</h2>
         <pre id="conversationContent"></pre>
-        <button onclick="toggleConversation()">Toggle Conversation</button>
+        <button onclick="toggleConversation()">대화내용 보기/가리기</button>
     </div>
     <div id="result"></div>
     <canvas id="myChart"></canvas>
 
-    <script>
-        let conversationText = '';
-        let myChart;
-
-        function uploadFile() {
-            const input = document.getElementById('fileInput');
-            const file = input.files[0];
-            const reader = new FileReader();
-            
-            reader.onload = function (e) {
-                conversationText = e.target.result;
-                document.getElementById('conversationContent').textContent = conversationText;
-                document.getElementById('conversation').style.display = 'block';
-                classifyData(conversationText);
-            };
-            
-            reader.readAsText(file);
-        }
-
-        function classifyData(data) {
-            fetch('http://localhost:5000/classify', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ data: data }),
-            })
-            .then(response => response.json())
-            .then(result => {
-                document.getElementById('result').innerText = JSON.stringify(result.result, null, 2);
-                displayChart(result.result);
-            });
-        }
-
-        function displayChart(result) {
-            const labels = Object.keys(result);
-            const values = Object.values(result);
-            
-            const ctx = document.getElementById('myChart').getContext('2d');
-
-            if (myChart) {
-                myChart.destroy(); // 기존 차트를 제거
-            }
-
-            myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: '# of Voice Phishing Cases',
-                        data: values,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-
-        function toggleConversation() {
-            const conversationDiv = document.getElementById('conversationContent');
-            if (conversationDiv.style.display === 'none') {
-                conversationDiv.style.display = 'block';
-            } else {
-                conversationDiv.style.display = 'none';
-            }
-        }
-    </script>
+    <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
