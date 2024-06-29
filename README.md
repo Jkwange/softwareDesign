@@ -1,6 +1,6 @@
-# softwareDesign
+# VOICE Spoofing Dection
 소프트웨어 설계 과목
-VOICE Spoofing Dection
+
 
 
 # [***주의 사항]
