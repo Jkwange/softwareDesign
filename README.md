@@ -1,4 +1,4 @@
-# VOICE Spoofing Dection
+# VOICE Spoofing Detection
 소프트웨어 설계 과목
 
 
